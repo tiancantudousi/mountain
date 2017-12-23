@@ -1,0 +1,38 @@
+/*
+    OtherVisit
+*/
+@import "ov-default.css";
+.navbar {
+/*    background-color: #168CD7;*/
+    border-bottom: 1px solid #168CD7;
+    border-color: #168CD7;
+}
+
+    .navbar .navbar-brand:hover {
+        color: #fff;
+        background-color: #168CD7;
+    }
+
+    .navbar .navbar-toggle:hover {
+        background-color: #168CD7 !important;
+    }
+
+    .navbar .navbar-toggle:focus {
+        background-color: #168CD7 !important;
+    }
+
+    .navbar .navbar-nav > li > a:hover {
+        color: #168CD7;
+        background-color: #168CD7 !important;
+    }
+
+.summary-info .info-list .info-list-rs {
+    padding: 0 0 0 12px;
+/*    border-left: 2px solid #168CD7;*/
+}
+
+    .summary-info .info-list .info-list-rs span a {
+        font-size: 16px;
+        text-decoration: none;
+        color: #168CD7;
+    }
