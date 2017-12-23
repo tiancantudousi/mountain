@@ -33,7 +33,7 @@ app.controller('controall',['$scope','$http',function($scope,$http){
 			break;
 		}
 		sessionStorage.setItem("imglist", imglist);
-		location.href="swiper3.html";
+		location.href="swiper.html";
 	}
 	
 	
