@@ -11,272 +11,92 @@
 		<link rel="stylesheet" href="css/swiper.min.css">
 		<script src="js/jquery-2.2.0.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/reset.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" href="css/selfswiper.css" />
 		<!-- Demo styles -->
-		<style>
-			* {
-				box-sizing: border-box;
-			}
-			
-			html,
-			body {
-				position: relative;
-				height: 100%;
-			}
-			
-			body {
-				background: #000;
-				font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-				font-size: 14px;
-				color: #000;
-				margin: 0;
-				padding: 0;
-			}
-			
-			#swiper-container1 {
-				display: flex;
-				flex-direction: column;
-				justify-content: space-between;
-			}
-			
-			.swiper-slide {
-				overflow: hidden;
-			}
-			
-			.headbar {
-				display: flex;
-				justify-content: flex-end;
-				align-items: center;
-				height: 5rem;
-				width: 100%;
-				background: -webkit-gradient(linear, 0 0, 0 100%, from(#8F8F8F), to(#494949));
-			}
-			
-			.goback {
-				margin-right: 1.5rem;
-				width: 5rem;
-				height: 3rem;
-				line-height: 3rem;
-				font-size: 1.6rem;
-				text-align: center;
-				color: white;
-				border-radius: 0.5rem;
-				background-color: black;
-			}
-			/*底部导航条样式*/
-			
-			.footerbar {
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-				height: 5rem;
-				width: 100%;
-				padding: 0 1%;
-				background: -webkit-gradient(linear, 0 0, 0 100%, from(#8F8F8F), to(#494949));
-			}
-			
-			.footerbar>div:first-child {
-				width: 10%;
-				height: 4rem;
-				line-height: 4rem;
-				color: white;
-				font-size: 1.2rem;
-				text-align: center;
-				background-color: #252525;
-				border-radius: 0.5rem;
-			}
-			
-			.footerbar>div:nth-child(2) {
-				display: flex;
-				position: relative;
-				width: 88%;
-				height: 4rem;
-				padding: 0 2%;
-				background-color: #252525;
-				align-items: center;
-				justify-content: space-between;
-				border-radius: 0.5rem;
-			}
-			/*.footerbar>div:nth-child(2) img {
-				
-			}*/
-			
-			.footerbar>div:nth-child(2) div:nth-child(2) {
-				width: 45%;
-				text-align: center;
-			}
-			
-			.swiper-button-prev,
-			.swiper-button-next {
-				width: 2.1rem;
-				height: 2.8rem;
-			}
-			
-			.swiper-button-prev {
-				background: url(img/L-arrow.png) no-repeat;
-				background-size: 100%;
-			}
-			
-			.swiper-button-next {
-				background: url(img/R-arrow.png) no-repeat;
-				background-size: 100%;
-			}
-			
-			.swipertwo {
-				display: none;
-				position: absolute;
-				width: 100%;
-				top: 0;
-				left: 0;
-				z-index: 100;
-				background-color: black;
-				align-items: center;
-			}
-			
-			#swiper-container2 img {
-				width: 100%;
-				height: auto;
-			}
-			
-			.closeimg {
-				position: absolute;
-				left: 1rem;
-				top: 1rem;
-				width: 5rem;
-				height: 3rem;
-				line-height: 3rem;
-				font-size: 1.6rem;
-				text-align: center;
-				color: gray;
-				border-radius: 0.5rem;
-				background-color: white;
-				z-index: 200;
-			}
-		</style>
 	</head>
 
 	<body>
-		<div class="container">
 
-			<!-- Swiper -->
-			<div class="main">
-				<div class="swiper-container" style="position:relative;" id="swiper-container1">
-					<div class="headbar">
-						<span class="goback close">返回</span>
-					</div>
-					<div class="swiper-wrapper">
-
-					</div>
-					<!-- Add Pagination -->
-					<div class="footerbar">
-						<div class="clickscale">查看</div>
-						<div>
-							<!--<img src="img/L-arrow.png">-->
-							<div class="swiper-button-prev"></div>
-							<div class="swiper-pagination" style="color:white">
-
-							</div>
-							<div class="swiper-button-next"></div>
-							<!--<img src="img/R-arrow.png">-->
-						</div>
-					</div>
-
-					<!-- Add Navigation -->
+		<!-- Swiper -->
+		<div class="main">
+			<div class="headbar">
+				<span class="goback close">返回</span>
+			</div>
+			<div class="swiper-container" id="swiper-container1">
+				<div class="swiper-wrapper">
 				</div>
 			</div>
-			<div class="swipertwo">
-				<span class="closeimg">关闭</span>
-				<div class="swiper-container" id="swiper-container2" style="display:flex;align-items: center;">
+			<div class="footerbar">
+				<div>
+					<img src="img/L-arrow.png" class="imgicon imgiconl" />
+					<p class="changeindex">第<span class="nowindex">1</span>张,共<span class="total"></span>张</p>
+					<img src="img/R-arrow.png" class="imgicon imgiconr" />
 				</div>
 			</div>
-
 		</div>
+
 		<!-- Swiper JS -->
 		<script src="js/swiper.min.js"></script>
 
 		<!-- Initialize Swiper -->
 		<script>
+//			解析url获取openid和ticket
+            function getUrlParam(name) {
+				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+				var r = window.location.search.substr(1).match(reg); //匹配目标参数
+				if(r != null) return unescape(r[2]);
+				return null; //返回参数值
+			}
+            var openid=getUrlParam('openid');
+	        var ticket=getUrlParam('ticket');
+	        var guide=getUrlParam('guide');
+
+			
 			$('.close').click(function() {
 				sessionStorage.removeItem("imglist");
 				window.history.go(-1);
 			});
-
 			var bodyheight = $(window).height();
 			var bodywidth = $(window).width();
-			$('.swiper-container').css('width', `${bodywidth}px`);
-			$('.swiper-container').css('min-height', `${bodyheight}px`);
-			$('.swiper2').css('min-hieght', `${bodyheight}px`);
+			$('.main').css('width', `${bodywidth}px`);
+//          通过图片原始比例来计算显示比例，处理兼容性
+//	        var swiperheight1=bodywidth*2;
+//			$('.swiper-container').css('height', `${swiperheight1}px`);
 			var imgstring = sessionStorage.getItem("imglist");
+			if(imgstring==null){
+				guide=="icon"?(location.href=`myicon.html?openid=${id}&ticket=${ket}`):(location.href=`checkrecord.html?openid=${id}&ticket=${ket}`);
+			}
 			var imglist = JSON.parse(imgstring);
-			//var  imglist=[{url:'img/load.jpg'},{url:'img/load.jpg'},{url:'img/load.jpg'},{url:'img/load.jpg'},{url:'img/load.jpg'},{url:'img/load.jpg'},{url:'img/load.jpg'}];
+			var total = imglist.length;
+			$('.total').html(`${total}`);
 			for(var i = 0; i < imglist.length; i++) {
-				var swipercontent = $(`<div class="swiper-slide">
-        <div class="swiper-zoom-container">
-//        <img data-src="${imglist[i].url}" class="swiper-lazy">
-           <img data-src="img/icon-CT1.jpg" class="swiper-lazy">
-           <div class="swiper-lazy-preloader"></div>
-        </div>
-      </div>`);
+				var swipercontent = $(`<div class="swiper-slide"><div class="swiper-zoom-container"><img data-src="${imglist[i].url}"  class="swiper-lazy"/><div class="swiper-lazy-preloader"></div></div></div>`);
 				swipercontent.appendTo($('#swiper-container1 .swiper-wrapper'));
 			}
+			$('.swiper-lazy').css('width', '100%');
+			
 
 			var swiper = new Swiper('#swiper-container1', {
-				zoom:{
-					toggle:false,
+				zoom: {
+					maxRatio: 5,
+					toggle: false
 				},
-				pagination: {
-					el: '.swiper-pagination',
-					type: 'fraction',
-					renderFraction: function(currentClass, totalClass) {
-						return '第<span class="' + currentClass + '"></span>' +
-							' 张,共 ' +
-							'<span class="' + totalClass + '"></span>张';
-					},
+				on: {
+					slideChangeTransitionEnd: function() {
+						nowindex = this.activeIndex + 1;
+						$('.nowindex').html(`${nowindex}`);
+					} //切换结束时，告诉我现在是第几个slide
 				},
-				
-//				navigation: {
-//					nextEl: '.swiper-button-next',
-//					prevEl: '.swiper-button-prev',
-//				},
 				lazy: {
 					loadPrevNext: true,
 				}
 			});
-			var swiper2=null;
-			$('.swiper-button-prev').click(function() {
-				swiper.zoom.out();
+			$('.imgiconl').click(function() {
 				swiper.slidePrev();
-				
 			})
-			$('.swiper-button-next').click(function() {
-				swiper.zoom.out();
+			$('.imgiconr').click(function() {
 				swiper.slideNext();
-				
 			})
-			$('.swiper-lazy').click(function() {
-
-				console.log($(this).attr('src'));
-			});
-			$('.closeimg').click(function(e) {
-				$('#swiper-container2>.swiper-wrapper').remove();
-				$('.swipertwo').css('display', 'none');
-			});
-			//			左下角按钮点击事件
-			$('.clickscale').click(function() {
-				$('.swipertwo').css('display', 'flex');
-				var indeximg = parseInt($('.swiper-pagination-current').html());
-				var imgurl = $(`#swiper-container1 .swiper-slide:nth-child(${indeximg}) img`).attr('src');
-				console.log($(`#swiper-container1 .swiper-slide:nth-child(${indeximg}) img`).attr('src'));
-				var showimg = $(`<div class="swiper-wrapper"><div class="swiper-slide"><div class="swiper-zoom-container"><img src="img/icon-CT1.jpg" class="zoomimg"></div></div></div>`);
-				showimg.appendTo($('#swiper-container2'));
-				swiper2 = new Swiper('#swiper-container2', {
-					width: bodywidth,
-					zoom: {
-						toggle: false
-					},
-					observer: true,
-					observeParents: true
-				});
-			});
 		</script>
 	</body>
 

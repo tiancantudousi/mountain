@@ -30,9 +30,12 @@
 				position: absolute;
 				right: 2rem;
 				bottom: 2rem;
+				height:2.6rem;
+				line-height:2.6rem;
+				width:6rem;
+				text-align: center;
 				color: white;
 				background-color: #313131;
-				padding: 0.5rem;
 				border-radius: 1rem;
 				font-size: 1.5rem;
 				font-family: courier;
@@ -55,15 +58,6 @@
 				padding: 0;
 			}
 			
-			#swiper-container2 {
-				width: 100%;
-				height: 100%;
-				position: absolute;
-				top: 0;
-				left: 0;
-				z-index: -10;
-			}
-			
 			.swiper-slide {
 				text-align: center;
 				font-size: 18px;
@@ -83,21 +77,6 @@
 				margin-top: 1rem;
 			}
 			
-			.choose {
-				position: absolute;
-				right: 2rem;
-				top: 2rem;
-				width: 2rem;
-				height: 2rem;
-				z-index: 11;
-			}
-			
-			.swiper-pagination {
-				position: absolute;
-				top: 2rem;
-				left: 50%;
-				transform: translate(-50%, 0);
-			}
 		</style>
 
 	</head>
@@ -113,14 +92,6 @@
 				</div>
 			</div>
 			<span class="showimage">查看影像</span>
-		</div>
-
-		<div class="swiper-container" id="swiper-container2">
-			<div class="swiper-wrapper"></div>
-			<div class="swiper-pagination" id="swiper-pagination2">
-				<span class="activeindex">1</span>/<span class="total"></span>
-			</div>
-			<img src="img/Choose.png" class="choose">
 		</div>
 
 	</body>
@@ -140,15 +111,18 @@
 		var swiperurl = window.location.href;
 		var id = getUrlParam('openid');
 		var ket = getUrlParam('ticket');
+		var guide="icon";
 		$.ajax({
 			type: 'POST',
 			url: "http://192.168.1.75:7765/Jpfilmcloud.JpwxWeb/FunctionWeb/GetPatientStudy",
 			data: {
 				openid: id,
-				ticket:ket				
+				ticket:ket
 			},
 			success: function(data) {
 				var res = JSON.parse(data);
+				var imglist=res.Films;
+				sessionStorage.setItem("imglist", imglist);			
 				//				主图片缩放
 				var imgmain = $(`<img src="${res.Reports[0].url}" id="mainimage">`);
 				imgmain.appendTo($('#swiper1'));
@@ -156,35 +130,10 @@
 					zoom: true
 				});
 
-				$('.total').html(`${res.Films.length}`);
-				for(var i = 0; i < res.Films.length; i++) {
-					console.log(res.Films[i].url);
-					var swipercontent = $(`<div class="swiper-slide" value="${i+1}">
-					<div class="swiper-zoom-container">
-						<img src="${res.Films[i].url}" /></div>
-				</div>`);
-					swipercontent.appendTo($('#swiper-container2 .swiper-wrapper'));
-				}
-				var mySwiper = new Swiper('#swiper-container2', {
-					zoom: true,
-					on: {
-						slideChangeTransitionEnd: function(event) {
-							console.log($('#swiper-container2 .swiper-slide-active').attr('value'));
-							$('.activeindex').html(`${$('#swiper-container2 .swiper-slide-active').attr('value')}`);
-							//你的事件
-						},
-					},
-				});
-
 			}
 		});
 		$('.showimage').click(function() {
-			$('.outercontent').css('z-index', '0');
-			$('.swiper-container').css('z-index', '10');
-		});
-		$('.choose').click(function() {
-			$('.outercontent').css('z-index', '100');
-			$('.swiper-container').css('z-index', '-10');
+			location.href=`swiper.html?openid=${id}&ticket=${ket}&guide=${guide}`;
 		});
 	</script>
 

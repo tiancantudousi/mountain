@@ -12,18 +12,11 @@ app.controller('controall',['$scope','$http',function($scope,$http){
 	var swiperurl=window.location.href;
 	var id=getUrlParam('openid');
 	var ket=getUrlParam('ticket');
+	var guide="record";
 	var postCfg = {headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'}};
 	
-	$http.post("http://192.168.1.155:5544/GetPatientStudys.aspx",$.param({openid:id,ticket:ket}),postCfg).success(function(res){
+	$http.post("http://192.168.1.155:5544/GetPatientStudys.aspx",$.param({openid:id,ticket:ket,guide:guide}),postCfg).success(function(res){
 			$scope.checkrecordlist=res;	
-			for(var i=0;i<res.length;i++){
-				res[i].FilmThumurl="http://192.168.1.155:5544/TemFilms/01.gif";
-				res[i].ReportThumurl="http://192.168.1.155:5544/TemFilms/01.gif";
-				for(var j=0;j<res[i].Films.length;j++){
-					res[i].Films[j].url="http://192.168.1.155:5544/TemFilms/01.png";
-				}
-				res[i].Reports[0].url="http://192.168.1.155:5544/TemReports/Testpng.png";
-			}
 			console.log(JSON.stringify(res));
 			console.log(res);
 			var str=JSON.stringify($scope.checkrecordlist[0].Films); 
@@ -35,19 +28,36 @@ app.controller('controall',['$scope','$http',function($scope,$http){
 		$scope.swipershow=false;
 		var imglist=null;
 		switch(n){
-			case 0:imglist=JSON.stringify($scope.checkrecordlist[index].Reports);		
+			case 0:imglist=JSON.stringify(checkblankimg($scope.checkrecordlist[index].Reports));		
 			break;
-			case 1:imglist=JSON.stringify($scope.checkrecordlist[index].Films);
+			case 1:imglist=JSON.stringify(checkblankimg($scope.checkrecordlist[index].Films));
 			break;
 		}
 		sessionStorage.setItem("imglist", imglist);
-		location.href="swiper3.html";
+		location.href=`swiper.html?openid=${id}&ticket=${ket}&guide=${guide}`;
 	}
-	
-	
-	
 	$scope.closeswiper=function(){
 		$scope.swipershow=true;
-	}
-	
+	}	
 }]);
+app.filter('checkimg',function(){
+	return function(input){
+		var output=input;
+		if(input==''||input==null){
+			output='img/noimg.png';
+		}
+		return output;
+	}
+});
+
+
+//处理图片不存在时的情况
+function checkblankimg(arr){
+	for(val of arr){
+		if(val.url==''||val.url==null){
+			val.url='img/cantloadimg.jpg';
+		}
+	}
+	return arr;
+}
+
