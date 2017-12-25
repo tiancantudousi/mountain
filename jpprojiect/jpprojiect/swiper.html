@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<!--		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">-->
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1.0">
+
+		<!-- Link Swiper's CSS -->
+		<link rel="stylesheet" href="css/swiper.min.css">
+		<script src="js/jquery-2.2.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/reset.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" href="css/selfswiper.css" />
+		<!-- Demo styles -->
+	</head>
+
+	<body>
+
+		<!-- Swiper -->
+		<div class="main">
+			<div class="headbar">
+				<span class="goback close">返回</span>
+			</div>
+			<div class="swiper-container" id="swiper-container1">
+					<div class="swiper-wrapper">
+					</div>
+			</div>
+			<div class="footerbar">
+				<div>
+					<img src="img/L-arrow.png" class="imgicon imgiconl"/>
+					<p class="changeindex">第<span class="nowindex">1</span>张,共<span class="total"></span>张</p>
+					<img src="img/R-arrow.png" class="imgicon imgiconr"/>
+				</div>
+			</div>
+		</div>
+
+		<!-- Swiper JS -->
+		<script src="js/swiper.min.js"></script>
+
+		<!-- Initialize Swiper -->
+		<script>
+			$('.close').click(function() {
+				sessionStorage.removeItem("imglist");
+				window.history.go(-1);
+			});
+			var bodyheight = $(window).height();
+			var bodywidth = $(window).width();
+			$('.main').css('width', `${bodywidth}px`);
+			$('.main').css('height', `${bodyheight}px`);
+			var swipercontainerheight = bodyheight - $('.headbar').height() * 2;
+			$('.indexmain').css('height', `${swipercontainerheight}px`);
+			var imgstring = sessionStorage.getItem("imglist");
+			var imglist = JSON.parse(imgstring);
+			var total = imglist.length;
+			$('.total').html(`${total}`);		
+			for(var i = 0; i < imglist.length; i++) {
+				var swipercontent = $(`<div class="swiper-slide"><div class="swiper-zoom-container"><img data-src="${imglist[i].url}"  class="swiper-lazy"/><div class="swiper-lazy-preloader"></div></div></div>`);
+				swipercontent.appendTo($('#swiper-container1 .swiper-wrapper'));
+			}
+			var swiper = new Swiper('#swiper-container1', {
+				zoom: {
+					toggle: false
+				},
+				lazy: {
+					loadPrevNext: true,
+				}
+			});
+			$('.imgiconl').click(function() {
+				swiper.slidePrev();
+			})
+			$('.imgiconr').click(function() {
+				swiper.slideNext();
+			})
+		</script>
+	</body>
+
+</html>
