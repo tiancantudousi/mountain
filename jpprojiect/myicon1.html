@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0, user-scalable=no" />
+
+		<link rel="stylesheet" href="css/swiper.min.css" />
+		<title>易影云影像</title>
+		<script src="js/jquery-2.2.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/reset.js"></script>
+		<script src="js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+		<style>
+			.outercontent {
+				display: flex;
+				align-items: center;
+				width: 100%;
+				height: 100%;
+				background-color: white;
+				/*z-index: 100;*/
+				position: relative;
+			}
+			
+			#mainimage {
+				width: 100%;
+				height: auto;
+			}
+			
+			.showimage {
+				position: absolute;
+				right: 2rem;
+				bottom: 2rem;
+				color: white;
+				background-color: #313131;
+				padding: 0.5rem;
+				border-radius: 1rem;
+				font-size: 1.5rem;
+				font-family: courier;
+			}
+			
+			html,
+			body {
+				position: relative;
+				height: 100%;
+			}
+			
+			body {
+				overflow-x: hidden;
+				background: #eee;
+				font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+				font-size: 14px;
+				color: #000;
+				background-color: white;
+				margin: 0;
+				padding: 0;
+			}
+			
+			.swiper-slide {
+				text-align: center;
+				font-size: 18px;
+				background: #fff;
+				display: -webkit-box;
+				display: -ms-flexbox;
+				display: -webkit-flex;
+				display: flex;
+				-webkit-box-pack: center;
+				-ms-flex-pack: center;
+				-webkit-justify-content: center;
+				justify-content: center;
+				-webkit-box-align: center;
+				-ms-flex-align: center;
+				-webkit-align-items: center;
+				align-items: center;
+				margin-top: 1rem;
+			}
+			
+		</style>
+
+	</head>
+
+	<body>
+		<div class="outercontent">
+			<!--<img ng-src="{{report}}" alt="" id="mainimage">-->
+			<div class="swiper-container" id="swiper-container1">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide">
+						<div class="swiper-zoom-container" id="swiper1"></div>
+					</div>
+				</div>
+			</div>
+			<span class="showimage">查看影像</span>
+		</div>
+
+	</body>
+	<script>
+		var bodyheight = $(window).height();
+		var bodywidth = $(window).width();
+		$('body').css('width', `${bodywidth}px`);
+		$('body').css('min-height', `${bodyheight}px`);
+
+		//      <img ng-src="{{report}}" alt="" id="mainimage">    
+		function getUrlParam(name) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+			var r = window.location.search.substr(1).match(reg); //匹配目标参数
+			if(r != null) return unescape(r[2]);
+			return null; //返回参数值
+		}
+		var swiperurl = window.location.href;
+		var id = getUrlParam('openid');
+		var ket = getUrlParam('ticket');
+		$.ajax({
+			type: 'POST',
+			url: "http://192.168.1.75:7765/Jpfilmcloud.JpwxWeb/FunctionWeb/GetPatientStudy",
+			data: {
+				openid: id,
+				ticket:ket				
+			},
+			success: function(data) {
+				var res = JSON.parse(data);
+				var imglist=res.Films;
+				sessionStorage.setItem("imglist", imglist);			
+				//				主图片缩放
+				var imgmain = $(`<img src="${res.Reports[0].url}" id="mainimage">`);
+				imgmain.appendTo($('#swiper1'));
+				var mySwiper = new Swiper('#swiper-container1', {
+					zoom: true
+				});
+
+			}
+		});
+		$('.showimage').click(function() {
+			location.href="swiper.html";
+		});
+//		$('.choose').click(function() {
+//			$('.outercontent').css('z-index', '100');
+//			$('.swiper-container').css('z-index', '-10');
+//		});
+	</script>
+
+</html>

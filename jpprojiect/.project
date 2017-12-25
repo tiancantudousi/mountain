@@ -39,6 +39,7 @@
 				</arguments>
 			</matcher>
 		</filter>
+<<<<<<< HEAD
 		<filter>
 			<id>1514000082214</id>
 			<name></name>
@@ -66,5 +67,7 @@
 				<arguments>1.0-name-matches-false-false-node_modules</arguments>
 			</matcher>
 		</filter>
+=======
+>>>>>>> parent of 372d53e... finishfirst
 	</filteredResources>
 </projectDescription>
