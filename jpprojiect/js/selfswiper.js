@@ -1,6 +1,4 @@
 window.onload=function(){
-			
-	
 		$('.close').click(function() {
 				sessionStorage.removeItem("imglist");
 				window.history.go(-1);

@@ -39,8 +39,6 @@
 				</arguments>
 			</matcher>
 		</filter>
-<<<<<<< HEAD
-<<<<<<< HEAD
 		<filter>
 			<id>1514000082214</id>
 			<name></name>
@@ -59,16 +57,8 @@
 				<arguments>1.0-name-matches-false-false-node_modules</arguments>
 			</matcher>
 		</filter>
-<<<<<<< HEAD
 		<filter>
 			<id>1514184156438</id>
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-		<filter>
-			<id>1514171547152</id>
->>>>>>> 609369679d5d72c082ff4283bd6303a6266c3b76
 			<name></name>
 			<type>26</type>
 			<matcher>
@@ -76,18 +66,5 @@
 				<arguments>1.0-name-matches-false-false-node_modules</arguments>
 			</matcher>
 		</filter>
-<<<<<<< HEAD
-=======
-=======
->>>>>>> parent of 372d53e... finishfirst
-=======
->>>>>>> parent of 4ab0375... changemyicon
-=======
->>>>>>> parent of 4ab0375... changemyicon
-=======
->>>>>>> parent of 4ab0375... changemyicon
-=======
->>>>>>> parent of 372d53e... finishfirst
->>>>>>> 609369679d5d72c082ff4283bd6303a6266c3b76
 	</filteredResources>
 </projectDescription>
