@@ -20,6 +20,48 @@
 				background-color: black;
 				margin:0;
 			}
+<<<<<<< HEAD
+=======
+			
+			.showimage {
+				position: absolute;
+				right: 2rem;
+				bottom: 2rem;
+				color: white;
+				background-color: #313131;
+				padding: 0.5rem;
+				border-radius: 1rem;
+				font-size: 1.5rem;
+				font-family: courier;
+			}
+			
+			html,
+			body {
+				position: relative;
+				height: 100%;
+			}
+			
+			body {
+				overflow-x: hidden;
+				background: #eee;
+				font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+				font-size: 14px;
+				color: #000;
+				background-color: white;
+				margin: 0;
+				padding: 0;
+			}
+			
+			#swiper-container2 {
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				top: 0;
+				left: 0;
+				z-index: -10;
+			}
+			
+>>>>>>> parent of 372d53e... finishfirst
 			.swiper-slide {
 				text-align: center;
 				font-size: 18px;
@@ -38,6 +80,7 @@
 				align-items: center;
 				margin-top: 1rem;
 			}
+<<<<<<< HEAD
 			.main{
                 background-color: black;
 				display:flex;
@@ -61,6 +104,23 @@
 /*控制容器的背景色*/
 			.swiper-slide{
 				background-color: black;
+=======
+			
+			.choose {
+				position: absolute;
+				right: 2rem;
+				top: 2rem;
+				width: 2rem;
+				height: 2rem;
+				z-index: 11;
+			}
+			
+			.swiper-pagination {
+				position: absolute;
+				top: 2rem;
+				left: 50%;
+				transform: translate(-50%, 0);
+>>>>>>> parent of 372d53e... finishfirst
 			}
 		</style>
 		<!-- Demo styles -->
@@ -77,6 +137,7 @@
 			<span class="showimage">查看影像</span>
 		</div>
 
+<<<<<<< HEAD
 		<!-- Swiper JS -->
 		<script src="js/swiper.min.js"></script>
 
@@ -133,5 +194,79 @@
 	
 		</script>
 	</body>
+=======
+		<div class="swiper-container" id="swiper-container2">
+			<div class="swiper-wrapper"></div>
+			<div class="swiper-pagination" id="swiper-pagination2">
+				<span class="activeindex">1</span>/<span class="total"></span>
+			</div>
+			<img src="img/Choose.png" class="choose">
+		</div>
+
+	</body>
+	<script>
+		var bodyheight = $(window).height();
+		var bodywidth = $(window).width();
+		$('body').css('width', `${bodywidth}px`);
+		$('body').css('min-height', `${bodyheight}px`);
+
+		//      <img ng-src="{{report}}" alt="" id="mainimage">    
+		function getUrlParam(name) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+			var r = window.location.search.substr(1).match(reg); //匹配目标参数
+			if(r != null) return unescape(r[2]);
+			return null; //返回参数值
+		}
+		var swiperurl = window.location.href;
+		var id = getUrlParam('openid');
+		var ket = getUrlParam('ticket');
+		$.ajax({
+			type: 'POST',
+			url: "http://192.168.1.75:7765/Jpfilmcloud.JpwxWeb/FunctionWeb/GetPatientStudy",
+			data: {
+				openid: id,
+				ticket:ket				
+			},
+			success: function(data) {
+				var res = JSON.parse(data);
+				//				主图片缩放
+				var imgmain = $(`<img src="${res.Reports[0].url}" id="mainimage">`);
+				imgmain.appendTo($('#swiper1'));
+				var mySwiper = new Swiper('#swiper-container1', {
+					zoom: true
+				});
+
+				$('.total').html(`${res.Films.length}`);
+				for(var i = 0; i < res.Films.length; i++) {
+					console.log(res.Films[i].url);
+					var swipercontent = $(`<div class="swiper-slide" value="${i+1}">
+					<div class="swiper-zoom-container">
+						<img src="${res.Films[i].url}" /></div>
+				</div>`);
+					swipercontent.appendTo($('#swiper-container2 .swiper-wrapper'));
+				}
+				var mySwiper = new Swiper('#swiper-container2', {
+					zoom: true,
+					on: {
+						slideChangeTransitionEnd: function(event) {
+							console.log($('#swiper-container2 .swiper-slide-active').attr('value'));
+							$('.activeindex').html(`${$('#swiper-container2 .swiper-slide-active').attr('value')}`);
+							//你的事件
+						},
+					},
+				});
+
+			}
+		});
+		$('.showimage').click(function() {
+			$('.outercontent').css('z-index', '0');
+			$('.swiper-container').css('z-index', '10');
+		});
+		$('.choose').click(function() {
+			$('.outercontent').css('z-index', '100');
+			$('.swiper-container').css('z-index', '-10');
+		});
+	</script>
+>>>>>>> parent of 372d53e... finishfirst
 
 </html>
