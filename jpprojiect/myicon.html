@@ -1,63 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 	<head>
 		<meta charset="utf-8">
-		<meta name="viewport" content="initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0, user-scalable=no" />
+		<title></title>
+		<!--		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">-->
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1.0">
 
-		<link rel="stylesheet" href="css/swiper.min.css" />
-		<title>易影云影像</title>
+		<!-- Link Swiper's CSS -->
+		<link rel="stylesheet" href="css/swiper.min.css">
 		<script src="js/jquery-2.2.0.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/reset.js"></script>
-		<script src="js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/reset.js" type="text/javascript" charset="utf-8"></script>
+		<!--	<link rel="stylesheet" href="css/selfswiper.css" />-->
 		<style>
-			.outercontent {
-				display: flex;
-				align-items: center;
-				width: 100%;
-				height: 100%;
-				background-color: white;
-				/*z-index: 100;*/
-				position: relative;
+			*{
+				box-sizing: border-box;
 			}
-			
-			#mainimage {
-				width: 100%;
-				height: auto;
+			body{
+				background-color: black;
+				margin:0;
 			}
-			
-			.showimage {
-				position: absolute;
-				right: 2rem;
-				bottom: 2rem;
-				height:2.6rem;
-				line-height:2.6rem;
-				width:6rem;
-				text-align: center;
-				color: white;
-				background-color: #313131;
-				border-radius: 1rem;
-				font-size: 1.5rem;
-				font-family: courier;
-			}
-			
-			html,
-			body {
-				position: relative;
-				height: 100%;
-			}
-			
-			body {
-				overflow-x: hidden;
-				background: #eee;
-				font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-				font-size: 14px;
-				color: #000;
-				background-color: white;
-				margin: 0;
-				padding: 0;
-			}
-			
 			.swiper-slide {
 				text-align: center;
 				font-size: 18px;
@@ -76,65 +38,100 @@
 				align-items: center;
 				margin-top: 1rem;
 			}
-			
+			.main{
+                background-color: black;
+				display:flex;
+				justify-content: center;
+				align-items: center;
+			}
+			.showimage {
+				position: absolute;
+				right: 2rem;
+				bottom: 2rem;
+				height: 2.6rem;
+				line-height: 2.8rem;
+				width: 8rem;
+				text-align: center;
+				color: white;
+				background-color: #313131;
+				border-radius: 1rem;
+				font-size: 1.5rem;
+				font-family: courier;
+			}
+/*控制容器的背景色*/
+			.swiper-slide{
+				background-color: black;
+			}
 		</style>
-
+		<!-- Demo styles -->
 	</head>
 
 	<body>
-		<div class="outercontent">
-			<!--<img ng-src="{{report}}" alt="" id="mainimage">-->
+
+		<!-- Swiper -->
+		<div class="main">
 			<div class="swiper-container" id="swiper-container1">
 				<div class="swiper-wrapper">
-					<div class="swiper-slide">
-						<div class="swiper-zoom-container" id="swiper1"></div>
-					</div>
 				</div>
 			</div>
 			<span class="showimage">查看影像</span>
 		</div>
 
-	</body>
-	<script>
-		var bodyheight = $(window).height();
-		var bodywidth = $(window).width();
-		$('body').css('width', `${bodywidth}px`);
-		$('body').css('min-height', `${bodyheight}px`);
+		<!-- Swiper JS -->
+		<script src="js/swiper.min.js"></script>
 
-		//      <img ng-src="{{report}}" alt="" id="mainimage">    
-		function getUrlParam(name) {
-			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
-			var r = window.location.search.substr(1).match(reg); //匹配目标参数
-			if(r != null) return unescape(r[2]);
-			return null; //返回参数值
-		}
-		var swiperurl = window.location.href;
-		var id = getUrlParam('openid');
-		var ket = getUrlParam('ticket');
-		var guide="icon";
-		$.ajax({
-			type: 'POST',
-			url: "http://192.168.1.75:7765/Jpfilmcloud.JpwxWeb/FunctionWeb/GetPatientStudy",
-			data: {
-				openid: id,
-				ticket:ket
-			},
-			success: function(data) {
-				var res = JSON.parse(data);
-				var imglist=res.Films;
-				sessionStorage.setItem("imglist", imglist);			
-				//				主图片缩放
-				var imgmain = $(`<img src="${res.Reports[0].url}" id="mainimage">`);
-				imgmain.appendTo($('#swiper1'));
-				var mySwiper = new Swiper('#swiper-container1', {
-					zoom: true
-				});
-
+		<!-- Initialize Swiper -->
+		<script>
+			//			解析url获取openid和ticket
+			function getUrlParam(name) {
+				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+				var r = window.location.search.substr(1).match(reg); //匹配目标参数
+				if(r != null) return unescape(r[2]);
+				return null; //返回参数值
 			}
-		});
-		$('.showimage').click(function() {
-			location.href=`swiper.html?openid=${id}&ticket=${ket}&guide=${guide}`;
-		});
-	</script>
+			var openid = getUrlParam('openid');
+			var ticket = getUrlParam('ticket');
+			var guide = "icon";
+
+			$('.showimage').click(function() {
+				location.href = `swiper.html?openid=${id}&ticket=${ket}&guide=${guide}`;
+			});
+			var bodyheight = $(window).height();
+			var bodywidth = $(window).width();
+			$('.main').css('width', `${bodywidth}px`);
+			$('.main').css('min-height', `${bodyheight}px`);
+			//          通过图片原始比例来计算显示比例，处理兼容性
+			//	        var swiperheight1=bodywidth*2;
+			//			$('.swiper-container').css('height', `${swiperheight1}px`);
+
+			
+				$.ajax({
+					type: 'POST',
+					url: "http://192.168.1.155:5544/Jpfilmcloud.JpwxWeb/FunctionWeb/GetPatientStudy",
+					data: {
+						openid: id,
+						ticket:ket
+					},
+					success: function(data) {
+						var res = JSON.parse(data);
+						var imglist=res.Films;
+						sessionStorage.setItem("imglist", imglist);								
+						var swipercontent = $(`<div class="swiper-slide"><div class="swiper-zoom-container"><img data-src="img/icon-CT1.jpg"  class="swiper-lazy"/><div class="swiper-lazy-preloader"></div></div></div>`);
+						swipercontent.appendTo($('#swiper-container1 .swiper-wrapper'));			
+						$('.swiper-lazy').css('width', '100%');
+						var swiper = new Swiper('#swiper-container1', {
+							zoom: {
+								maxRatio: 5
+							},
+			
+							lazy: {
+								loadPrevNext: true,
+							}
+						});
+					}
+		        });
+	
+		</script>
+	</body>
 
 </html>
