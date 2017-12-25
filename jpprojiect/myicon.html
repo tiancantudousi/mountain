@@ -24,7 +24,81 @@
 			#mainimage {
 				width: 100%;
 				height: auto;
+<<<<<<< HEAD
+<<<<<<< HEAD
 			}
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> parent of 4ab0375... changemyicon
+			
+			.showimage {
+				position: absolute;
+				right: 2rem;
+				bottom: 2rem;
+<<<<<<< HEAD
+<<<<<<< HEAD
+				color: white;
+				background-color: #313131;
+				padding: 0.5rem;
+=======
+				height:2.6rem;
+				line-height:2.6rem;
+				width:6rem;
+				text-align: center;
+				color: white;
+				background-color: #313131;
+>>>>>>> parent of 4ab0375... changemyicon
+=======
+				color: white;
+				background-color: #313131;
+				padding: 0.5rem;
+>>>>>>> parent of 372d53e... finishfirst
+				border-radius: 1rem;
+				font-size: 1.5rem;
+				font-family: courier;
+			}
+			
+			html,
+			body {
+				position: relative;
+				height: 100%;
+			}
+			
+			body {
+				overflow-x: hidden;
+				background: #eee;
+				font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+				font-size: 14px;
+				color: #000;
+				background-color: white;
+				margin: 0;
+				padding: 0;
+			}
+			
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 372d53e... finishfirst
+			#swiper-container2 {
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				top: 0;
+				left: 0;
+				z-index: -10;
+			}
+			
+<<<<<<< HEAD
+>>>>>>> parent of 372d53e... finishfirst
+=======
+>>>>>>> parent of 4ab0375... changemyicon
+=======
+			}
+=======
+			}
+>>>>>>> parent of 4ab0375... changemyicon
 			
 			.showimage {
 				position: absolute;
@@ -58,6 +132,12 @@
 				padding: 0;
 			}
 			
+<<<<<<< HEAD
+>>>>>>> parent of 4ab0375... changemyicon
+=======
+>>>>>>> parent of 4ab0375... changemyicon
+=======
+>>>>>>> parent of 372d53e... finishfirst
 			.swiper-slide {
 				text-align: center;
 				font-size: 18px;
@@ -76,7 +156,64 @@
 				align-items: center;
 				margin-top: 1rem;
 			}
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+			.main{
+                background-color: black;
+				display:flex;
+				justify-content: center;
+				align-items: center;
+			}
+			.showimage {
+				position: absolute;
+				right: 2rem;
+				bottom: 2rem;
+				height: 2.6rem;
+				line-height: 2.8rem;
+				width: 8rem;
+				text-align: center;
+				color: white;
+				background-color: #313131;
+				border-radius: 1rem;
+				font-size: 1.5rem;
+				font-family: courier;
+			}
+/*控制容器的背景色*/
+			.swiper-slide{
+				background-color: black;
+=======
 			
+			.choose {
+				position: absolute;
+				right: 2rem;
+				top: 2rem;
+				width: 2rem;
+				height: 2rem;
+				z-index: 11;
+			}
+			
+			.swiper-pagination {
+				position: absolute;
+				top: 2rem;
+				left: 50%;
+				transform: translate(-50%, 0);
+<<<<<<< HEAD
+>>>>>>> parent of 372d53e... finishfirst
+			}
+=======
+			
+>>>>>>> parent of 4ab0375... changemyicon
+=======
+			
+>>>>>>> parent of 4ab0375... changemyicon
+=======
+			
+>>>>>>> parent of 4ab0375... changemyicon
+=======
+			}
+>>>>>>> parent of 372d53e... finishfirst
 		</style>
 
 	</head>
@@ -92,6 +229,123 @@
 				</div>
 			</div>
 			<span class="showimage">查看影像</span>
+		</div>
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+		<!-- Swiper JS -->
+		<script src="js/swiper.min.js"></script>
+
+		<!-- Initialize Swiper -->
+		<script>
+			//			解析url获取openid和ticket
+			function getUrlParam(name) {
+				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+				var r = window.location.search.substr(1).match(reg); //匹配目标参数
+				if(r != null) return unescape(r[2]);
+				return null; //返回参数值
+			}
+			var openid = getUrlParam('openid');
+			var ticket = getUrlParam('ticket');
+			var guide = "icon";
+=======
+=======
+>>>>>>> parent of 4ab0375... changemyicon
+=======
+>>>>>>> parent of 4ab0375... changemyicon
+=======
+		<div class="swiper-container" id="swiper-container2">
+			<div class="swiper-wrapper"></div>
+			<div class="swiper-pagination" id="swiper-pagination2">
+				<span class="activeindex">1</span>/<span class="total"></span>
+			</div>
+			<img src="img/Choose.png" class="choose">
+		</div>
+
+>>>>>>> parent of 372d53e... finishfirst
+	</body>
+	<script>
+		var bodyheight = $(window).height();
+		var bodywidth = $(window).width();
+		$('body').css('width', `${bodywidth}px`);
+		$('body').css('min-height', `${bodyheight}px`);
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 4ab0375... changemyicon
+=======
+>>>>>>> parent of 4ab0375... changemyicon
+=======
+>>>>>>> parent of 4ab0375... changemyicon
+
+		//      <img ng-src="{{report}}" alt="" id="mainimage">    
+		function getUrlParam(name) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+			var r = window.location.search.substr(1).match(reg); //匹配目标参数
+			if(r != null) return unescape(r[2]);
+			return null; //返回参数值
+		}
+		var swiperurl = window.location.href;
+		var id = getUrlParam('openid');
+		var ket = getUrlParam('ticket');
+		$.ajax({
+			type: 'POST',
+			url: "http://192.168.1.75:7765/Jpfilmcloud.JpwxWeb/FunctionWeb/GetPatientStudy",
+			data: {
+				openid: id,
+				ticket:ket				
+			},
+			success: function(data) {
+				var res = JSON.parse(data);
+				//				主图片缩放
+				var imgmain = $(`<img src="${res.Reports[0].url}" id="mainimage">`);
+				imgmain.appendTo($('#swiper1'));
+				var mySwiper = new Swiper('#swiper-container1', {
+					zoom: true
+				});
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+			
+				$.ajax({
+					type: 'POST',
+					url: "http://192.168.1.155:5544/Jpfilmcloud.JpwxWeb/FunctionWeb/GetPatientStudy",
+					data: {
+						openid: id,
+						ticket:ket
+					},
+					success: function(data) {
+						var res = JSON.parse(data);
+						var imglist=res.Films;
+						sessionStorage.setItem("imglist", imglist);								
+						var swipercontent = $(`<div class="swiper-slide"><div class="swiper-zoom-container"><img data-src="img/icon-CT1.jpg"  class="swiper-lazy"/><div class="swiper-lazy-preloader"></div></div></div>`);
+						swipercontent.appendTo($('#swiper-container1 .swiper-wrapper'));			
+						$('.swiper-lazy').css('width', '100%');
+						var swiper = new Swiper('#swiper-container1', {
+							zoom: {
+								maxRatio: 5
+							},
+			
+							lazy: {
+								loadPrevNext: true,
+							}
+						});
+					}
+		        });
+	
+		</script>
+	</body>
+=======
+		<div class="swiper-container" id="swiper-container2">
+			<div class="swiper-wrapper"></div>
+			<div class="swiper-pagination" id="swiper-pagination2">
+				<span class="activeindex">1</span>/<span class="total"></span>
+			</div>
+			<img src="img/Choose.png" class="choose">
 		</div>
 
 	</body>
@@ -111,18 +365,15 @@
 		var swiperurl = window.location.href;
 		var id = getUrlParam('openid');
 		var ket = getUrlParam('ticket');
-		var guide="icon";
 		$.ajax({
 			type: 'POST',
 			url: "http://192.168.1.75:7765/Jpfilmcloud.JpwxWeb/FunctionWeb/GetPatientStudy",
 			data: {
 				openid: id,
-				ticket:ket
+				ticket:ket				
 			},
 			success: function(data) {
 				var res = JSON.parse(data);
-				var imglist=res.Films;
-				sessionStorage.setItem("imglist", imglist);			
 				//				主图片缩放
 				var imgmain = $(`<img src="${res.Reports[0].url}" id="mainimage">`);
 				imgmain.appendTo($('#swiper1'));
@@ -130,11 +381,65 @@
 					zoom: true
 				});
 
+=======
+>>>>>>> parent of 372d53e... finishfirst
+				$('.total').html(`${res.Films.length}`);
+				for(var i = 0; i < res.Films.length; i++) {
+					console.log(res.Films[i].url);
+					var swipercontent = $(`<div class="swiper-slide" value="${i+1}">
+					<div class="swiper-zoom-container">
+						<img src="${res.Films[i].url}" /></div>
+				</div>`);
+					swipercontent.appendTo($('#swiper-container2 .swiper-wrapper'));
+				}
+				var mySwiper = new Swiper('#swiper-container2', {
+					zoom: true,
+					on: {
+						slideChangeTransitionEnd: function(event) {
+							console.log($('#swiper-container2 .swiper-slide-active').attr('value'));
+							$('.activeindex').html(`${$('#swiper-container2 .swiper-slide-active').attr('value')}`);
+							//你的事件
+						},
+					},
+				});
+
+<<<<<<< HEAD
 			}
 		});
 		$('.showimage').click(function() {
-			location.href=`swiper.html?openid=${id}&ticket=${ket}&guide=${guide}`;
+			$('.outercontent').css('z-index', '0');
+			$('.swiper-container').css('z-index', '10');
+		});
+		$('.choose').click(function() {
+			$('.outercontent').css('z-index', '100');
+			$('.swiper-container').css('z-index', '-10');
 		});
 	</script>
+>>>>>>> parent of 372d53e... finishfirst
+=======
+=======
+>>>>>>> parent of 4ab0375... changemyicon
+=======
+>>>>>>> parent of 4ab0375... changemyicon
+=======
+>>>>>>> parent of 372d53e... finishfirst
+			}
+		});
+		$('.showimage').click(function() {
+			$('.outercontent').css('z-index', '0');
+			$('.swiper-container').css('z-index', '10');
+		});
+		$('.choose').click(function() {
+			$('.outercontent').css('z-index', '100');
+			$('.swiper-container').css('z-index', '-10');
+		});
+	</script>
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 4ab0375... changemyicon
+=======
+>>>>>>> parent of 4ab0375... changemyicon
+=======
+>>>>>>> parent of 4ab0375... changemyicon
 
 </html>
