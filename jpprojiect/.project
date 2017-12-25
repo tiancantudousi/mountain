@@ -58,6 +58,7 @@
 				<arguments>1.0-name-matches-false-false-node_modules</arguments>
 			</matcher>
 		</filter>
+<<<<<<< HEAD
 		<filter>
 			<id>1514171547152</id>
 			<name></name>
@@ -69,5 +70,7 @@
 		</filter>
 =======
 >>>>>>> parent of 372d53e... finishfirst
+=======
+>>>>>>> parent of 4ab0375... changemyicon
 	</filteredResources>
 </projectDescription>

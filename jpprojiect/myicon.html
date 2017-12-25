@@ -1,35 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 	<head>
 		<meta charset="utf-8">
-		<title></title>
-		<!--		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">-->
-		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1.0">
+		<meta name="viewport" content="initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0, user-scalable=no" />
 
-		<!-- Link Swiper's CSS -->
-		<link rel="stylesheet" href="css/swiper.min.css">
+		<link rel="stylesheet" href="css/swiper.min.css" />
+		<title>易影云影像</title>
 		<script src="js/jquery-2.2.0.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/reset.js" type="text/javascript" charset="utf-8"></script>
-		<!--	<link rel="stylesheet" href="css/selfswiper.css" />-->
+		<script src="js/reset.js"></script>
+		<script src="js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
 		<style>
-			*{
-				box-sizing: border-box;
+			.outercontent {
+				display: flex;
+				align-items: center;
+				width: 100%;
+				height: 100%;
+				background-color: white;
+				/*z-index: 100;*/
+				position: relative;
 			}
-			body{
-				background-color: black;
-				margin:0;
+			
+			#mainimage {
+				width: 100%;
+				height: auto;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 4ab0375... changemyicon
 			
 			.showimage {
 				position: absolute;
 				right: 2rem;
 				bottom: 2rem;
+<<<<<<< HEAD
 				color: white;
 				background-color: #313131;
 				padding: 0.5rem;
+=======
+				height:2.6rem;
+				line-height:2.6rem;
+				width:6rem;
+				text-align: center;
+				color: white;
+				background-color: #313131;
+>>>>>>> parent of 4ab0375... changemyicon
 				border-radius: 1rem;
 				font-size: 1.5rem;
 				font-family: courier;
@@ -52,6 +69,7 @@
 				padding: 0;
 			}
 			
+<<<<<<< HEAD
 			#swiper-container2 {
 				width: 100%;
 				height: 100%;
@@ -62,6 +80,8 @@
 			}
 			
 >>>>>>> parent of 372d53e... finishfirst
+=======
+>>>>>>> parent of 4ab0375... changemyicon
 			.swiper-slide {
 				text-align: center;
 				font-size: 18px;
@@ -80,6 +100,7 @@
 				align-items: center;
 				margin-top: 1rem;
 			}
+<<<<<<< HEAD
 <<<<<<< HEAD
 			.main{
                 background-color: black;
@@ -122,21 +143,27 @@
 				transform: translate(-50%, 0);
 >>>>>>> parent of 372d53e... finishfirst
 			}
+=======
+			
+>>>>>>> parent of 4ab0375... changemyicon
 		</style>
-		<!-- Demo styles -->
+
 	</head>
 
 	<body>
-
-		<!-- Swiper -->
-		<div class="main">
+		<div class="outercontent">
+			<!--<img ng-src="{{report}}" alt="" id="mainimage">-->
 			<div class="swiper-container" id="swiper-container1">
 				<div class="swiper-wrapper">
+					<div class="swiper-slide">
+						<div class="swiper-zoom-container" id="swiper1"></div>
+					</div>
 				</div>
 			</div>
 			<span class="showimage">查看影像</span>
 		</div>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		<!-- Swiper JS -->
 		<script src="js/swiper.min.js"></script>
@@ -153,18 +180,45 @@
 			var openid = getUrlParam('openid');
 			var ticket = getUrlParam('ticket');
 			var guide = "icon";
+=======
+	</body>
+	<script>
+		var bodyheight = $(window).height();
+		var bodywidth = $(window).width();
+		$('body').css('width', `${bodywidth}px`);
+		$('body').css('min-height', `${bodyheight}px`);
+>>>>>>> parent of 4ab0375... changemyicon
 
-			$('.showimage').click(function() {
-				location.href = `swiper.html?openid=${id}&ticket=${ket}&guide=${guide}`;
-			});
-			var bodyheight = $(window).height();
-			var bodywidth = $(window).width();
-			$('.main').css('width', `${bodywidth}px`);
-			$('.main').css('min-height', `${bodyheight}px`);
-			//          通过图片原始比例来计算显示比例，处理兼容性
-			//	        var swiperheight1=bodywidth*2;
-			//			$('.swiper-container').css('height', `${swiperheight1}px`);
+		//      <img ng-src="{{report}}" alt="" id="mainimage">    
+		function getUrlParam(name) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+			var r = window.location.search.substr(1).match(reg); //匹配目标参数
+			if(r != null) return unescape(r[2]);
+			return null; //返回参数值
+		}
+		var swiperurl = window.location.href;
+		var id = getUrlParam('openid');
+		var ket = getUrlParam('ticket');
+		var guide="icon";
+		$.ajax({
+			type: 'POST',
+			url: "http://192.168.1.75:7765/Jpfilmcloud.JpwxWeb/FunctionWeb/GetPatientStudy",
+			data: {
+				openid: id,
+				ticket:ket
+			},
+			success: function(data) {
+				var res = JSON.parse(data);
+				var imglist=res.Films;
+				sessionStorage.setItem("imglist", imglist);			
+				//				主图片缩放
+				var imgmain = $(`<img src="${res.Reports[0].url}" id="mainimage">`);
+				imgmain.appendTo($('#swiper1'));
+				var mySwiper = new Swiper('#swiper-container1', {
+					zoom: true
+				});
 
+<<<<<<< HEAD
 			
 				$.ajax({
 					type: 'POST',
@@ -268,5 +322,13 @@
 		});
 	</script>
 >>>>>>> parent of 372d53e... finishfirst
+=======
+			}
+		});
+		$('.showimage').click(function() {
+			location.href=`swiper.html?openid=${id}&ticket=${ket}&guide=${guide}`;
+		});
+	</script>
+>>>>>>> parent of 4ab0375... changemyicon
 
 </html>
